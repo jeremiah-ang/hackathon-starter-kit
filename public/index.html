@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anonymous Q&A Platform</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🎤 Anonymous Q&A</h1>
+            <p class="subtitle">Ask questions and get answers in real-time</p>
+        </header>
+
+        <main>
+            <!-- Question Form -->
+            <section class="question-form-section">
+                <h2>Ask a Question</h2>
+                <form id="questionForm">
+                    <textarea 
+                        id="questionInput" 
+                        placeholder="What would you like to ask? (max 1000 characters)"
+                        maxlength="1000"
+                        rows="4"
+                        required
+                    ></textarea>
+                    <div class="form-footer">
+                        <span id="charCount" class="char-count">0/1000</span>
+                        <button type="submit" class="btn btn-primary">Submit Question</button>
+                    </div>
+                </form>
+            </section>
+
+            <!-- Filter Options -->
+            <section class="filter-section">
+                <h2>Questions</h2>
+                <div class="filter-buttons">
+                    <button class="btn btn-filter active" data-sort="recent">Recent</button>
+                    <button class="btn btn-filter" data-sort="popular">Popular</button>
+                    <button class="btn btn-filter" data-sort="unanswered">Unanswered</button>
+                </div>
+            </section>
+
+            <!-- Questions List -->
+            <section class="questions-section">
+                <div id="questionsList" class="questions-list">
+                    <div class="loading">Loading questions...</div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Question Detail Modal -->
+        <div id="questionModal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <div id="questionDetail"></div>
+            </div>
+        </div>
+    </div>
+
+    <div id="connectionStatus" class="connection-status">
+        <span id="statusDot" class="status-dot"></span>
+        <span id="statusText">Connecting...</span>
+    </div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
