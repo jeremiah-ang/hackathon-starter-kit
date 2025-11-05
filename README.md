@@ -67,7 +67,12 @@ A complete starter kit for building a live anonymous Q&A platform with DevContai
    npm run init-db
    ```
 
-4. **Start the application**
+4. **Seed with sample data (optional)**
+   ```bash
+   npm run seed-db
+   ```
+
+5. **Start the application**
    ```bash
    npm run dev
    ```
@@ -100,7 +105,12 @@ A complete starter kit for building a live anonymous Q&A platform with DevContai
    npm run init-db
    ```
 
-5. **Start the application**
+5. **Seed sample data (optional)**
+   ```bash
+   npm run seed-db
+   ```
+
+6. **Start the application**
    ```bash
    npm run dev
    ```
@@ -183,6 +193,8 @@ Configuration is located in `.devcontainer/mcp-config.json`.
 - `npm start` - Start the application in production mode
 - `npm run dev` - Start with nodemon for auto-reload
 - `npm run init-db` - Initialize database schema
+- `npm run seed-db` - Seed database with sample data
+- `npm run reset-db` - Reset database (init + seed)
 - `npm test` - Run tests (placeholder)
 
 ### Environment Variables

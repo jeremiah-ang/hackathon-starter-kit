@@ -7,6 +7,8 @@
     "start": "node src/index.js",
     "dev": "nodemon src/index.js",
     "init-db": "node src/db/init.js",
+    "seed-db": "node src/db/seed.js",
+    "reset-db": "npm run init-db && npm run seed-db",
     "test": "echo \"Error: no test specified\" && exit 0"
   },
   "keywords": [
