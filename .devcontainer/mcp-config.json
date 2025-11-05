@@ -1,0 +1,20 @@
+{
+  "mcpServers": {
+    "postgres": {
+      "url": "http://localhost:3001",
+      "description": "PostgreSQL MCP Server for database operations"
+    },
+    "playwright": {
+      "url": "https://playwright-mcp.modelcontextprotocol.io",
+      "description": "Playwright MCP for browser automation and testing"
+    },
+    "context7": {
+      "url": "https://context7-mcp.modelcontextprotocol.io",
+      "description": "Context7 MCP for context management"
+    },
+    "sentry": {
+      "url": "https://sentry-mcp.modelcontextprotocol.io",
+      "description": "Sentry MCP for error tracking and monitoring"
+    }
+  }
+}

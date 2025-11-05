@@ -1,0 +1,52 @@
+{
+  "name": "Hackathon Starter Kit",
+  "dockerComposeFile": "docker-compose.yml",
+  "service": "app",
+  "workspaceFolder": "/workspaces/hackathon-starter-kit",
+  
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "dbaeumer.vscode-eslint",
+        "esbenp.prettier-vscode",
+        "ms-azuretools.vscode-docker",
+        "GraphQL.vscode-graphql"
+      ],
+      "settings": {
+        "terminal.integrated.defaultProfile.linux": "bash"
+      }
+    }
+  },
+
+  "features": {
+    "ghcr.io/devcontainers/features/node:1": {
+      "version": "20"
+    },
+    "ghcr.io/devcontainers/features/git:1": {}
+  },
+
+  "forwardPorts": [3000, 5432],
+  "portsAttributes": {
+    "3000": {
+      "label": "Application",
+      "onAutoForward": "notify"
+    },
+    "5432": {
+      "label": "PostgreSQL",
+      "onAutoForward": "silent"
+    }
+  },
+
+  "postCreateCommand": "npm install",
+  
+  "remoteEnv": {
+    "DATABASE_URL": "postgresql://postgres:postgres@postgres:5432/qanda",
+    "NODE_ENV": "development"
+  },
+
+  "mounts": [
+    "source=${localEnv:HOME}/.config/mcp,target=/home/node/.config/mcp,type=bind,consistency=cached"
+  ],
+
+  "runServices": ["app", "postgres", "postgres-mcp"]
+}

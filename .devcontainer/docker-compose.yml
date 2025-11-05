@@ -1,0 +1,51 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - ../..:/workspaces:cached
+    command: sleep infinity
+    network_mode: service:postgres
+    depends_on:
+      - postgres
+      - postgres-mcp
+    environment:
+      - DATABASE_URL=postgresql://postgres:postgres@localhost:5432/qanda
+      - NODE_ENV=development
+      - MCP_POSTGRES_URL=http://localhost:3001
+      - MCP_PLAYWRIGHT_URL=https://playwright-mcp.modelcontextprotocol.io
+      - MCP_CONTEXT7_URL=https://context7-mcp.modelcontextprotocol.io
+      - MCP_SENTRY_URL=https://sentry-mcp.modelcontextprotocol.io
+
+  postgres:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: qanda
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  postgres-mcp:
+    image: mcp/postgres-server:latest
+    restart: unless-stopped
+    network_mode: service:postgres
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      - POSTGRES_CONNECTION_STRING=postgresql://postgres:postgres@localhost:5432/qanda
+      - MCP_SERVER_PORT=3001
+    command: ["--connection-string", "postgresql://postgres:postgres@localhost:5432/qanda"]
+
+volumes:
+  postgres-data:
